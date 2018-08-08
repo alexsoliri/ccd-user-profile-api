@@ -2,6 +2,10 @@ variable "product" {
   type    = "string"
 }
 
+variable "raw_product" {
+  default = "ccd" // jenkins-library overrides product for PRs and adds e.g. pr-118-ccd
+}
+
 variable "component" {
   type    = "string"
 }
@@ -50,11 +54,6 @@ variable "database_name" {
   default = "ccd_user_profile"
 }
 
-variable "use_uk_db" {
-  type = "string"
-  default = "false"
-}
-
 ////////////////////////////////
 // S2S
 ////////////////////////////////
@@ -62,4 +61,8 @@ variable "use_uk_db" {
 variable "authorised-services" {
   type    = "string"
   default = "ccd_data,ccd_definition"
+}
+
+variable "common_tags" {
+  type = "map"
 }
