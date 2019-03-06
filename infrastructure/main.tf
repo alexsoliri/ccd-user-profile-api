@@ -1,10 +1,10 @@
 provider "azurerm" {
-  version = "1.19.0"
+  version = "1.22.1"
 }
 
 locals {
   app_full_name = "${var.product}-${var.component}"
-  aseName = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
+  aseName = "core-compute-${var.env}"
 
   local_env = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview" ) ? "aat" : "saat" : var.env}"
   local_ase = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview" ) ? "core-compute-aat" : "core-compute-saat" : local.aseName}"
@@ -52,6 +52,8 @@ module "user-profile-api" {
     USER_PROFILE_DB_NAME        = "${module.user-profile-db.postgresql_database}"
     USER_PROFILE_DB_USERNAME    = "${module.user-profile-db.user_name}"
     USER_PROFILE_DB_PASSWORD    = "${module.user-profile-db.postgresql_password}"
+
+    USER_PROFILE_DB_OPTIONS     = "?sslmode=require"
 
     ENABLE_DB_MIGRATE = "false"
 

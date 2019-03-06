@@ -11,14 +11,15 @@ java:
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
   applicationPort: 4453
+  applicationInsightsInstrumentKey: "fake-key"
   environment:
     ENABLE_DB_MIGRATE: true
-    USER_PROFILE_DB_USE_SSL: false
     USER_PROFILE_S2S_AUTHORISED_SERVICES: ccd_data,ccd_definition,ccd_admin
     USER_PROFILE_DB_HOST: ${SERVICE_NAME}-postgres
     USER_PROFILE_DB_PORT: 5432
     USER_PROFILE_DB_NAME: ccd_user_profile
     USER_PROFILE_DB_USERNAME: ccd
     USER_PROFILE_DB_PASSWORD: ccd
-    CCD_DS_SERVICE_SECRET: ${CCD_DS_SERVICE_SECRET}
-    APPINSIGHTS_INSTRUMENTATIONKEY: fake-key
+
+tags:
+  postgresql-pod: true
